@@ -1,5 +1,5 @@
 <template>
-  <div ref="appli" class="min-h-screen bg-neutral-200 flex items-center justify-center lg:py-10">
+  <div class="min-h-screen bg-neutral-200 flex items-center justify-center lg:py-10">
     <div class="mt-[50px] max-w-5xl mx-auto lg:mt-0">
       <header class="flex items-center justify-center">
         <img src="./assets/logo.svg" alt="Logo">
