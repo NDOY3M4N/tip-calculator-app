@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer base {
+  /* === Hide Arrows From Input Number === */
+  /* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+
+  /* Chrome, Safari, Edge, Opera */
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+}
