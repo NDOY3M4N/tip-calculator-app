@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-neutral-200 flex items-center justify-center lg:py-11">
     <div class="mt-[50px] w-full max-w-xl lg:mt-0 lg:max-w-5xl">
       <header class="flex justify-center">
-        <img width="87" height="54" src="./assets/logo.svg" alt="Logo">
+        <IconLogo />
       </header>
       <main class="mt-10 p-8 bg-white rounded-t-3xl grid gap-10 lg:gap-12 lg:grid-cols-2 lg:rounded-b-3xl">
         <div class="space-y-8">
@@ -79,9 +79,10 @@ import MyButton from './components/MyButton.vue'
 import MyInput from './components/MyInput.vue'
 import MyInputWrapper from './components/MyInputWrapper.vue'
 import MyFormBlock from './components/MyFormBlock.vue'
+import IconLogo from './assets/logo.svg'
 
 export default {
-  components: { MyButton, MyInput, MyInputWrapper, MyFormBlock },
+  components: { IconLogo, MyButton, MyInput, MyInputWrapper, MyFormBlock },
   setup() {
     const bill = ref(null)
     const tip = ref(null)
