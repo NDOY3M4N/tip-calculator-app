@@ -7,7 +7,7 @@
       <main class="mt-10 p-8 bg-white rounded-t-3xl grid gap-10 lg:gap-12 lg:grid-cols-2 lg:rounded-b-3xl">
         <div class="space-y-8">
           <MyFormBlock labelId="bill_value" labelText="Bill" :state="bill">
-            <MyInputWrapper class="mt-2" iconInput="/icon-dollar.svg">
+            <MyInputWrapper class="mt-2" iconInput="IconDollar">
               <MyInput v-model.number="bill" id="bill_value" />
             </MyInputWrapper>
           </MyFormBlock>
@@ -33,7 +33,7 @@
           </MyFormBlock>
 
           <MyFormBlock labelId="people_value" labelText="Number of People" :state="people">
-            <MyInputWrapper class="mt-2" iconInput="/icon-person.svg">
+            <MyInputWrapper class="mt-2" iconInput="IconPerson">
               <MyInput v-model.number="people" id="people_value" />
             </MyInputWrapper>
           </MyFormBlock>
