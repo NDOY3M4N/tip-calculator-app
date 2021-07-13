@@ -40,7 +40,7 @@ Users should be able to:
 
 - Semantic HTML5 markup
 - Flexbox
-- Grid
+- CSS Grid
 - Mobile-first workflow
 - [Vue](https://v3.vuejs.org/) - JS library
 - [Vite](https://vitejs.dev) - Build Tool
