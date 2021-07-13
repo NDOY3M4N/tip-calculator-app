@@ -1,10 +1,10 @@
 <template>
   <div class="min-h-screen bg-neutral-200 flex items-center justify-center lg:py-11">
-    <div class="mt-[50px] max-w-5xl mx-auto lg:mt-0">
-      <header class="flex items-center justify-center">
-        <img src="./assets/logo.svg" alt="Logo">
+    <div class="mt-[50px] w-full max-w-xl lg:mt-0 lg:max-w-5xl">
+      <header class="flex justify-center">
+        <img width="87" height="54" src="./assets/logo.svg" alt="Logo">
       </header>
-      <main class="mt-10 p-8 bg-white rounded-t-3xl max-w-xl grid gap-10 lg:max-w-full lg:gap-12 lg:grid-cols-2 lg:rounded-b-3xl">
+      <main class="mt-10 p-8 bg-white rounded-t-3xl grid gap-10 lg:gap-12 lg:grid-cols-2 lg:rounded-b-3xl">
         <div class="space-y-8">
           <MyFormBlock labelId="bill_value" labelText="Bill" :state="bill">
             <MyInputWrapper class="mt-2" iconInput="/icon-dollar.svg">
