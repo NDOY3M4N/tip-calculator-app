@@ -99,8 +99,6 @@ export default {
       return values.some(value => value === null || value === '' || value === 0)
     }
 
-    // Use ref on component
-    // https://stackoverflow.com/questions/67033933/cant-use-template-ref-on-component-in-vue-3-composition-api
     // Disable the reset button on first load
     onMounted(() => btnReset.value.$el.disabled = true)
 
