@@ -1,10 +1,29 @@
 <template>
-  <div class="min-h-screen bg-neutral-200 flex items-center justify-center lg:py-11">
+  <div
+    class="
+      min-h-screen
+      bg-neutral-200
+      flex
+      items-center
+      justify-center
+      lg:py-11
+    "
+  >
     <div class="mt-[50px] w-full max-w-xl lg:mt-0 lg:max-w-5xl">
-      <header class="flex justify-center">
-        <IconLogo />
-      </header>
-      <main class="mt-10 p-8 bg-white rounded-t-3xl grid gap-10 lg:gap-12 lg:grid-cols-2 lg:rounded-b-3xl">
+      <MyHeader />
+      <main
+        class="
+          mt-10
+          p-8
+          bg-white
+          rounded-t-3xl
+          grid
+          gap-10
+          lg:gap-12
+          lg:grid-cols-2
+          lg:rounded-b-3xl
+        "
+      >
         <div class="space-y-8">
           <MyFormBlock labelId="bill_value" labelText="Bill" :state="bill">
             <MyInputWrapper class="mt-2" iconInput="IconDollar">
@@ -12,33 +31,54 @@
             </MyInputWrapper>
           </MyFormBlock>
 
-          <MyFormBlock labelId="tip_value" labelText="Select Tip %" :state="tip">
+          <MyFormBlock
+            labelId="tip_value"
+            labelText="Select Tip %"
+            :state="tip"
+          >
             <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
               <MyButton
                 variant="primary"
                 v-for="tipValue in [5, 10, 15, 25, 50]"
                 :key="tipValue"
                 @click="tip = tipValue"
-                :class="{'!bg-primary !text-neutral-500': tipValue === tip}"
+                :class="{ '!bg-primary !text-neutral-500': tipValue === tip }"
               >
                 {{ tipValue }}%
               </MyButton>
               <MyInput
                 ref="customTip"
                 @input="setTip"
-                id="tip_value" max="100" placeholder="Custom"
+                id="tip_value"
+                max="100"
+                placeholder="Custom"
                 :class="{ '!border-red-400': tip === 0 }"
-                class="!text-center"/>
+                class="!text-center"
+              />
             </div>
           </MyFormBlock>
 
-          <MyFormBlock labelId="people_value" labelText="Number of People" :state="people">
+          <MyFormBlock
+            labelId="people_value"
+            labelText="Number of People"
+            :state="people"
+          >
             <MyInputWrapper class="mt-2" iconInput="IconPerson">
               <MyInput v-model.number="people" id="people_value" />
             </MyInputWrapper>
           </MyFormBlock>
         </div>
-        <div class="px-4 py-7 bg-neutral-500 flex flex-col rounded-2xl md:px-10 md:py-12">
+        <div
+          class="
+            px-4
+            py-7
+            bg-neutral-500
+            flex flex-col
+            rounded-2xl
+            md:px-10
+            md:py-12
+          "
+        >
           <div class="space-y-6 md:space-y-10">
             <div class="flex items-center justify-between">
               <div>
@@ -46,7 +86,9 @@
                 <span class="text-neutral-300 text-sm font-bold">/ person</span>
               </div>
               <div>
-                <h2 class="text-primary text-3xl font-bold md:text-5xl">{{ format(tipAmount) }}</h2>
+                <h2 class="text-primary text-3xl font-bold md:text-5xl">
+                  {{ format(tipAmount) }}
+                </h2>
               </div>
             </div>
             <div class="flex items-center justify-between">
@@ -54,15 +96,15 @@
                 <h3 class="text-white font-bold md:text-lg">Total</h3>
                 <span class="text-neutral-300 text-sm font-bold">/ person</span>
               </div>
-              <div><h2 class="text-primary text-3xl font-bold md:text-5xl">{{ format(totalAmount) }}</h2></div>
+              <div>
+                <h2 class="text-primary text-3xl font-bold md:text-5xl">
+                  {{ format(totalAmount) }}
+                </h2>
+              </div>
             </div>
           </div>
           <div class="mt-9 lg:mt-auto">
-            <MyButton
-              variant="secondary"
-              @click="reset"
-              ref="btnReset"
-            >
+            <MyButton variant="secondary" @click="reset" ref="btnReset">
               Reset
             </MyButton>
           </div>
@@ -73,70 +115,83 @@
 </template>
 
 <script>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch } from "vue";
 
-import MyButton from './components/MyButton.vue'
-import MyInput from './components/MyInput.vue'
-import MyInputWrapper from './components/MyInputWrapper.vue'
-import MyFormBlock from './components/MyFormBlock.vue'
-import IconLogo from './assets/logo.svg'
+import MyButton from "./components/MyButton.vue";
+import MyInput from "./components/MyInput.vue";
+import MyInputWrapper from "./components/MyInputWrapper.vue";
+import MyFormBlock from "./components/MyFormBlock.vue";
+import MyHeader from "./components/MyHeader.vue";
 
 export default {
-  components: { IconLogo, MyButton, MyInput, MyInputWrapper, MyFormBlock },
+  components: { MyHeader, MyButton, MyInput, MyInputWrapper, MyFormBlock },
   setup() {
-    const bill = ref(null)
-    const tip = ref(null)
-    const people = ref(null)
+    const bill = ref(null);
+    const tip = ref(null);
+    const people = ref(null);
 
-    const btnReset = ref(null)
-    const customTip = ref(null)
+    const btnReset = ref(null);
+    const customTip = ref(null);
 
-    const { format } = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    })
+    const { format } = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
 
     const checkValue = (values) => {
-      return values.some(value => value === null || value === '' || value === 0)
-    }
+      return values.some(
+        (value) => value === null || value === "" || value === 0
+      );
+    };
 
     // Disable the reset button on first load
-    onMounted(() => btnReset.value.$el.disabled = true)
+    onMounted(() => (btnReset.value.$el.disabled = true));
 
     // Remove the disable state on the reset button
     watch([bill, tip, people], (newValues) => {
-      btnReset.value.$el.disabled = checkValue(newValues)
-    })
+      btnReset.value.$el.disabled = checkValue(newValues);
+    });
 
     const tipAmount = computed(() => {
-      if (checkValue([bill.value, tip.value, people.value])) return 0
+      if (checkValue([bill.value, tip.value, people.value])) return 0;
 
-      return ((bill.value * (tip.value / 100)) / people.value)
-    })
+      return (bill.value * (tip.value / 100)) / people.value;
+    });
 
     const totalAmount = computed(() => {
-      if (checkValue([bill.value, tip.value, people.value])) return 0
+      if (checkValue([bill.value, tip.value, people.value])) return 0;
 
-      return (bill.value / people.value) + tipAmount.value
-    })
+      return bill.value / people.value + tipAmount.value;
+    });
 
     const reset = () => {
-      bill.value = tip.value = people.value = null
+      bill.value = tip.value = people.value = null;
       // Clear the custom tip input
-      customTip.value.$el.value = ''
+      customTip.value.$el.value = "";
       // Remove the focus style on the reset button
-      btnReset.value.$el.blur()
-    }
+      btnReset.value.$el.blur();
+    };
 
-    const setTip = evt => {
-      const tipValue = +evt.target.value
+    const setTip = (evt) => {
+      const tipValue = +evt.target.value;
 
       if (tipValue <= 100) {
-        tip.value = tipValue
+        tip.value = tipValue;
       }
-    }
+    };
 
-    return { bill, tip, people, reset, tipAmount, totalAmount, setTip, btnReset, format, customTip }
+    return {
+      bill,
+      tip,
+      people,
+      reset,
+      tipAmount,
+      totalAmount,
+      setTip,
+      btnReset,
+      format,
+      customTip,
+    };
   },
-}
+};
 </script>
