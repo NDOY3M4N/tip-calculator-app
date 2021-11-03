@@ -19,7 +19,7 @@ export default {
     iconInput: {
       type: String,
       required: true,
-      validator: (val) => ["IconDdollar", "IconPerson"].includes(val),
+      validator: (val) => ["IconDollar", "IconPerson"].includes(val),
     },
   },
 };
