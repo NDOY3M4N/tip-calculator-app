@@ -12,6 +12,7 @@ export default {
     const bill = ref(null);
     const tip = ref(null);
     const people = ref(null);
+    const tipList = ref([5, 10, 15, 25, 50]);
 
     const btnReset = ref(null);
     const customTip = ref(null);
@@ -59,6 +60,7 @@ export default {
     };
 
     return {
+      tipList,
       bill,
       tip,
       people,
@@ -99,7 +101,7 @@ export default {
         <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
           <MyButton
             variant="primary"
-            v-for="tipValue in [5, 10, 15, 25, 50]"
+            v-for="tipValue in tipList"
             :key="tipValue"
             @click="tip = tipValue"
             :class="{ '!bg-primary !text-neutral-500': tipValue === tip }"
