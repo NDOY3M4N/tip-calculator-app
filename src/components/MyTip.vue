@@ -1,5 +1,6 @@
 <script>
 import { ref, computed, onMounted, watch } from "vue";
+import formatPrice from "../utils/formatPrice.js";
 import MyButton from "./MyButton.vue";
 import MyInput from "./MyInput.vue";
 import MyInputWrapper from "./MyInputWrapper.vue";
@@ -14,11 +15,6 @@ export default {
 
     const btnReset = ref(null);
     const customTip = ref(null);
-
-    const { format } = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
 
     const checkValue = (values) => {
       return values.some(
@@ -71,7 +67,7 @@ export default {
       totalAmount,
       setTip,
       btnReset,
-      format,
+      formatPrice,
       customTip,
     };
   },
@@ -151,7 +147,7 @@ export default {
           </div>
           <div>
             <h2 class="text-primary text-3xl font-bold md:text-5xl">
-              {{ format(tipAmount) }}
+              {{ formatPrice(tipAmount) }}
             </h2>
           </div>
         </div>
@@ -162,7 +158,7 @@ export default {
           </div>
           <div>
             <h2 class="text-primary text-3xl font-bold md:text-5xl">
-              {{ format(totalAmount) }}
+              {{ formatPrice(totalAmount) }}
             </h2>
           </div>
         </div>
