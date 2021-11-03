@@ -1,6 +1,7 @@
 <script>
-import { ref, computed, onMounted, watch } from "vue";
-import formatPrice from "../utils/formatPrice.js";
+import { ref, computed, onMounted, watch, reactive, toRefs } from "vue";
+import formatPrice from "../utils/formatPrice";
+import checkValues from "../utils/checkValues";
 import MyButton from "./MyButton.vue";
 import MyInput from "./MyInput.vue";
 import MyInputWrapper from "./MyInputWrapper.vue";
@@ -9,42 +10,39 @@ import MyFormBlock from "./MyFormBlock.vue";
 export default {
   components: { MyButton, MyInput, MyInputWrapper, MyFormBlock },
   setup() {
-    const bill = ref(null);
-    const tip = ref(null);
-    const people = ref(null);
-    const tipList = ref([5, 10, 15, 25, 50]);
+    const state = reactive({
+      bill: null,
+      tip: null,
+      people: null,
+      tipDefaultList: [5, 10, 15, 25, 50],
+    });
 
     const btnReset = ref(null);
     const customTip = ref(null);
-
-    const checkValue = (values) => {
-      return values.some(
-        (value) => value === null || value === "" || value === 0
-      );
-    };
 
     // Disable the reset button on first load
     onMounted(() => (btnReset.value.$el.disabled = true));
 
     // Remove the disable state on the reset button
-    watch([bill, tip, people], (newValues) => {
-      btnReset.value.$el.disabled = checkValue(newValues);
-    });
+    watch(
+      () => [state.bill, state.tip, state.people],
+      (newValues) => (btnReset.value.$el.disabled = checkValues(newValues))
+    );
 
     const tipAmount = computed(() => {
-      if (checkValue([bill.value, tip.value, people.value])) return 0;
+      if (checkValues([state.bill, state.tip, state.people])) return 0;
 
-      return (bill.value * (tip.value / 100)) / people.value;
+      return (state.bill * (state.tip / 100)) / state.people;
     });
 
     const totalAmount = computed(() => {
-      if (checkValue([bill.value, tip.value, people.value])) return 0;
+      if (checkValues([state.bill, state.tip, state.people])) return 0;
 
-      return bill.value / people.value + tipAmount.value;
+      return state.bill / state.people + tipAmount.value;
     });
 
     const reset = () => {
-      bill.value = tip.value = people.value = null;
+      state.bill = state.tip = state.people = null;
       // Clear the custom tip input
       customTip.value.$el.value = "";
       // Remove the focus style on the reset button
@@ -55,15 +53,12 @@ export default {
       const tipValue = +evt.target.value;
 
       if (tipValue <= 100) {
-        tip.value = tipValue;
+        state.tip = tipValue;
       }
     };
 
     return {
-      tipList,
-      bill,
-      tip,
-      people,
+      ...toRefs(state),
       reset,
       tipAmount,
       totalAmount,
@@ -101,7 +96,7 @@ export default {
         <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
           <MyButton
             variant="primary"
-            v-for="tipValue in tipList"
+            v-for="tipValue in tipDefaultList"
             :key="tipValue"
             @click="tip = tipValue"
             :class="{ '!bg-primary !text-neutral-500': tipValue === tip }"
