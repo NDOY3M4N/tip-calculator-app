@@ -1,5 +1,4 @@
 import { ref, computed, onMounted, watch, reactive, toRefs } from "vue";
-import formatPrice from "../utils/formatPrice";
 import checkValues from "../utils/checkValues";
 
 const useTip = () => {
@@ -57,7 +56,6 @@ const useTip = () => {
     totalAmount,
     setTip,
     btnReset,
-    formatPrice,
     customTip,
   };
 }

@@ -1,5 +1,6 @@
 <script>
 import useTip from "../composables/useTip";
+import formatPrice from "../utils/formatPrice";
 import MyButton from "./MyButton.vue";
 import MyInput from "./MyInput.vue";
 import MyInputWrapper from "./MyInputWrapper.vue";
@@ -8,7 +9,7 @@ import MyFormBlock from "./MyFormBlock.vue";
 export default {
   components: { MyButton, MyInput, MyInputWrapper, MyFormBlock },
   setup() {
-    return useTip();
+    return { ...useTip(), formatPrice };
   },
 };
 </script>
