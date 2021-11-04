@@ -8,7 +8,7 @@ import MyFormBlock from "./MyFormBlock.vue";
 export default {
   components: { MyButton, MyInput, MyInputWrapper, MyFormBlock },
   setup() {
-    return { ...useTip() };
+    return useTip();
   },
 };
 </script>
