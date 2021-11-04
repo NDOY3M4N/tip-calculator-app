@@ -1,33 +1,20 @@
-<script>
+<script setup>
 import { onMounted, watch } from "vue";
 import useTip from "../composables/useTip";
 import formatPrice from "../utils/formatPrice";
 import checkValues from "../utils/checkValues";
 import MyButton from "./MyButton.vue";
 
-export default {
-  components: { MyButton },
-  setup() {
-    const { btnReset, tipAmount, totalAmount, reset } = useTip();
+const { btnReset, tipAmount, totalAmount, reset } = useTip();
 
-    // Disable the reset button on first load
-    onMounted(() => (btnReset.value.$el.disabled = true));
+// Disable the reset button on first load
+onMounted(() => (btnReset.value.$el.disabled = true));
 
-    // Remove the disable state on the reset button
-    watch(
-      [tipAmount, totalAmount],
-      (newValues) => (btnReset.value.$el.disabled = checkValues(newValues))
-    );
-
-    return {
-      formatPrice,
-      btnReset,
-      tipAmount,
-      totalAmount,
-      reset,
-    };
-  },
-};
+// Remove the disable state on the reset button
+watch(
+  [tipAmount, totalAmount],
+  (newValues) => (btnReset.value.$el.disabled = checkValues(newValues))
+);
 </script>
 
 <template>

@@ -1,10 +1,6 @@
-<script>
+<script setup>
 import MyTipForm from "./MyTipForm.vue";
 import MyTipResults from "./MyTipResults.vue";
-
-export default {
-  components: { MyTipForm, MyTipResults },
-};
 </script>
 
 <template>

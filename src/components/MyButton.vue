@@ -18,28 +18,23 @@
   </button>
 </template>
 
-<script>
+<script setup>
 import { computed } from "vue";
 
-export default {
-  props: {
-    variant: {
-      type: String,
-      required: true,
-      validator: (val) => ["primary", "secondary"].includes(val),
-    },
+const props = defineProps({
+  variant: {
+    type: String,
+    required: true,
+    validator: (val) => ["primary", "secondary"].includes(val),
   },
-  setup(props) {
-    const dynamicStyles = computed(() => {
-      return {
-        "bg-neutral-500 text-white hover:text-neutral-500":
-          props.variant === "primary",
-        "bg-primary text-neutral-500  focus:ring-offset-neutral-500 disabled:bg-primary/30 disabled:text-neutral-500/40 disabled:cursor-not-allowed":
-          props.variant === "secondary",
-      };
-    });
+});
 
-    return { dynamicStyles };
-  },
-};
+const dynamicStyles = computed(() => {
+  return {
+    "bg-neutral-500 text-white hover:text-neutral-500":
+      props.variant === "primary",
+    "bg-primary text-neutral-500  focus:ring-offset-neutral-500 disabled:bg-primary/30 disabled:text-neutral-500/40 disabled:cursor-not-allowed":
+      props.variant === "secondary",
+  };
+});
 </script>

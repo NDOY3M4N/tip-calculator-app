@@ -12,12 +12,10 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    labelId: String,
-    labelText: String,
-    state: Number,
-  },
-};
+<script setup>
+defineProps({
+  labelId: { type: String, required: true },
+  labelText: { type: String, required: true },
+  state: { type: [Number, null], required: true },
+});
 </script>

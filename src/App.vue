@@ -7,11 +7,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import MyHeader from "./components/MyHeader.vue";
 import MyTip from "./components/MyTip.vue";
-
-export default {
-  components: { MyHeader, MyTip },
-};
 </script>
