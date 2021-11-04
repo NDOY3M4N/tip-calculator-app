@@ -7,6 +7,7 @@ const state = reactive({
   people: null,
   tipDefaultList: [5, 10, 15, 25, 50],
 });
+
 const useTip = () => {
 
   const btnReset = ref(null);
