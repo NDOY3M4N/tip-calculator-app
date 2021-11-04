@@ -28,7 +28,7 @@ export default {
       lg:rounded-b-3xl
     "
   >
-    <div class="space-y-8">
+    <form class="space-y-8">
       <MyFormBlock labelId="bill_value" labelText="Bill" :state="bill">
         <MyInputWrapper class="mt-2" iconInput="IconDollar">
           <MyInput v-model.number="bill" id="bill_value" />
@@ -67,7 +67,7 @@ export default {
           <MyInput v-model.number="people" id="people_value" />
         </MyInputWrapper>
       </MyFormBlock>
-    </div>
+    </form>
     <div
       class="
         px-4
