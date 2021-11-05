@@ -8,7 +8,10 @@ import MyButton from "./MyButton.vue";
 const { btnReset, tipAmount, totalAmount, reset } = useTip();
 
 // Disable the reset button on first load
-onMounted(() => (btnReset.value.$el.disabled = true));
+onMounted(() => {
+  if (tipAmount.value === 0 && totalAmount.value === 0)
+    btnReset.value.$el.disabled = true;
+});
 
 // Remove the disable state on the reset button
 watch(
