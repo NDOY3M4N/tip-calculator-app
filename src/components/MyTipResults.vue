@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, watch } from "vue";
+import { onMounted, watch, computed, reactive } from "vue";
 import useTip from "../composables/useTip";
 import formatPrice from "../utils/formatPrice";
 import checkValues from "../utils/checkValues";
@@ -13,11 +13,26 @@ onMounted(() => {
     btnReset.value.$el.disabled = true;
 });
 
-// Remove the disable state on the reset button
-watch(
-  [tipAmount, totalAmount],
-  (newValues) => (btnReset.value.$el.disabled = checkValues(newValues))
-);
+// The state transition was shamelessly copied from vuejs's doc
+// https://v3.vuejs.org/guide/transitions-state.html#animating-state-with-watchers
+const tweened = reactive({
+  tip: tipAmount.value,
+  totalPerPerson: totalAmount.value,
+});
+
+const computedTip = computed(() => tweened.tip);
+const computedTotal = computed(() => tweened.totalPerPerson);
+
+watch([tipAmount, totalAmount], (newValues) => {
+  // Animate the reactive state
+  gsap.to(tweened, {
+    duration: 0.3,
+    tip: newValues[0],
+    totalPerPerson: newValues[1],
+  });
+  // Remove the disable state on the reset button
+  btnReset.value.$el.disabled = checkValues(newValues);
+});
 </script>
 
 <template>
@@ -32,7 +47,7 @@ watch(
         </div>
         <div>
           <h2 class="text-primary text-3xl font-bold md:text-5xl">
-            {{ formatPrice(tipAmount) }}
+            {{ formatPrice(computedTip) }}
           </h2>
         </div>
       </div>
@@ -43,7 +58,7 @@ watch(
         </div>
         <div>
           <h2 class="text-primary text-3xl font-bold md:text-5xl">
-            {{ formatPrice(totalAmount) }}
+            {{ formatPrice(computedTotal) }}
           </h2>
         </div>
       </div>
