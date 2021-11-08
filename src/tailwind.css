@@ -3,14 +3,27 @@
 @tailwind components;
 
 @layer base {
-  /* Chrome, Safari, Edge, Opera */
+  /* Use self-host font */
+  @font-face {
+    font-family: 'Space Mono';
+    font-weight: 400;
+    src: url('/fonts/SpaceMono-Regular.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Space Mono';
+    font-weight: 700;
+    src: url('/fonts/SpaceMono-Bold.woff2') format('woff2');
+  }
+
+  /* Remove control in Chrome */
   input[type=number]::-webkit-outer-spin-button,
   input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  /* Firefox */
+  /* Remove controls in Firefox */
   input[type=number] {
     -moz-appearance: textfield;
   }
