@@ -33,6 +33,12 @@ watch([tipAmount, totalAmount], (newValues) => {
   // Remove the disable state on the reset button
   btnReset.value.$el.disabled = checkValues(newValues);
 });
+
+const resetResults = () => {
+  reset();
+  // Remove the focus styles on the reset button
+  btnReset.value.$el.blur();
+};
 </script>
 
 <template>
@@ -64,7 +70,7 @@ watch([tipAmount, totalAmount], (newValues) => {
       </div>
     </div>
     <div class="mt-9 lg:mt-auto">
-      <MyButton variant="secondary" @click="reset" ref="btnReset">
+      <MyButton variant="secondary" @click="resetResults" ref="btnReset">
         Reset
       </MyButton>
     </div>
