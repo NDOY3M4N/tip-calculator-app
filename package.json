@@ -6,6 +6,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "gsap": "^3.8.0",
     "vue": "^3.0.5"
   },
   "devDependencies": {

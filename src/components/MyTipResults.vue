@@ -4,6 +4,7 @@ import useTip from "../composables/useTip";
 import formatPrice from "../utils/formatPrice";
 import checkValues from "../utils/checkValues";
 import MyButton from "./MyButton.vue";
+import gsap from "gsap";
 
 const { tipAmount, totalAmount, reset } = useTip();
 const btnReset = ref(null);
