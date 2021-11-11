@@ -1,13 +1,15 @@
 <script setup>
-import { watch } from "vue";
+import { watch, ref } from "vue";
 import useTip from "../composables/useTip";
 import MyButton from "./MyButton.vue";
 import MyInput from "./MyInput.vue";
 import MyInputWrapper from "./MyInputWrapper.vue";
 import MyFormBlock from "./MyFormBlock.vue";
 
-const { bill, tip, people, tipDefaultList, customTip, setTip } = useTip();
+const { bill, tip, people, tipDefaultList, setTip } = useTip();
+const customTip = ref(null);
 
+// Set customTip to empty when the tip has been resetted
 watch(tip, (newVal) => {
   if (newVal === null) customTip.value.$el.value = "";
 });

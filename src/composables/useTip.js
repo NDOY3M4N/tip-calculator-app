@@ -1,4 +1,4 @@
-import { ref, computed, reactive, toRefs } from "vue";
+import { computed, reactive, toRefs } from "vue";
 import checkValues from "../utils/checkValues";
 
 const state = reactive({
@@ -9,10 +9,6 @@ const state = reactive({
 });
 
 const useTip = () => {
-
-  const btnReset = ref(null);
-  const customTip = ref(null);
-
   const tipAmount = computed(() => {
     if (checkValues([state.bill, state.tip, state.people])) return 0;
 
@@ -43,9 +39,7 @@ const useTip = () => {
     tipAmount,
     totalAmount,
     setTip,
-    btnReset,
-    customTip,
   };
-}
+};
 
-export default useTip
+export default useTip;
