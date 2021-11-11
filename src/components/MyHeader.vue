@@ -4,6 +4,6 @@ import IconLogo from "../assets/logo.svg";
 
 <template>
   <header class="flex justify-center">
-    <IconLogo class="text-red-500 fill-current" />
+    <IconLogo />
   </header>
 </template>
