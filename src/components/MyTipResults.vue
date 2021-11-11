@@ -1,38 +1,20 @@
 <script setup>
-import { onMounted, watch, computed, reactive, ref } from "vue";
+import { onMounted, watch, ref } from "vue";
 import useTip from "../composables/useTip";
 import formatPrice from "../utils/formatPrice";
 import checkValues from "../utils/checkValues";
 import MyButton from "./MyButton.vue";
-import gsap from "gsap";
 
-const { tipAmount, totalAmount, reset } = useTip();
+const { reset, computedTotal, computedTip } = useTip();
 const btnReset = ref(null);
 
 // Disable the reset button on first load
 onMounted(() => {
-  if (tipAmount.value === 0 && totalAmount.value === 0)
+  if (computedTip.value === 0 && computedTotal.value === 0)
     btnReset.value.$el.disabled = true;
 });
 
-// The state transition was shamelessly copied from vuejs's doc
-// https://v3.vuejs.org/guide/transitions-state.html#animating-state-with-watchers
-const tweened = reactive({
-  tip: tipAmount.value,
-  totalPerPerson: totalAmount.value,
-});
-
-const computedTip = computed(() => tweened.tip);
-const computedTotal = computed(() => tweened.totalPerPerson);
-
-watch([tipAmount, totalAmount], (newValues) => {
-  // Animate the reactive state
-  gsap.to(tweened, {
-    duration: 0.3,
-    tip: newValues[0],
-    totalPerPerson: newValues[1],
-  });
-  // Remove the disable state on the reset button
+watch([computedTip, computedTotal], (newValues) => {
   btnReset.value.$el.disabled = checkValues(newValues);
 });
 

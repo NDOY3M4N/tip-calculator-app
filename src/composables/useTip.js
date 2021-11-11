@@ -1,5 +1,6 @@
-import { computed, reactive, toRefs } from "vue";
+import { watch, computed, reactive, toRefs } from "vue";
 import checkValues from "../utils/checkValues";
+import gsap from "gsap";
 
 const state = reactive({
   bill: null,
@@ -9,18 +10,6 @@ const state = reactive({
 });
 
 const useTip = () => {
-  const tipAmount = computed(() => {
-    if (checkValues([state.bill, state.tip, state.people])) return 0;
-
-    return (state.bill * (state.tip / 100)) / state.people;
-  });
-
-  const totalAmount = computed(() => {
-    if (checkValues([state.bill, state.tip, state.people])) return 0;
-
-    return state.bill / state.people + tipAmount.value;
-  });
-
   const reset = () => {
     state.bill = state.tip = state.people = null;
   };
@@ -33,11 +22,40 @@ const useTip = () => {
     }
   };
 
+  const tipAmount = computed(() => {
+    if (checkValues([state.bill, state.tip, state.people])) return 0;
+
+    return (state.bill * (state.tip / 100)) / state.people;
+  });
+
+  const totalAmount = computed(() => {
+    if (checkValues([state.bill, state.tip, state.people])) return 0;
+
+    return state.bill / state.people + tipAmount.value;
+  });
+
+  const tweened = reactive({
+    tip: tipAmount.value,
+    totalPerPerson: totalAmount.value,
+  });
+
+  const computedTip = computed(() => tweened.tip);
+  const computedTotal = computed(() => tweened.totalPerPerson);
+
+  // Animate the reactive state
+  watch([tipAmount, totalAmount], (newValues) => {
+    gsap.to(tweened, {
+      duration: 0.3,
+      tip: newValues[0],
+      totalPerPerson: newValues[1],
+    });
+  });
+
   return {
     ...toRefs(state),
     reset,
-    tipAmount,
-    totalAmount,
+    computedTip,
+    computedTotal,
     setTip,
   };
 };
