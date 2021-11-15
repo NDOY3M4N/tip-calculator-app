@@ -5,14 +5,15 @@ import MyInput from "./MyInput.vue";
 import MyInputWrapper from "./MyInputWrapper.vue";
 import MyFormBlock from "./MyFormBlock.vue";
 
-const { bill, tip, people, tipDefaultList, setTip } = useTip();
+const { bill, tip, people, tipDefaultList, setTip, setBill, setPeople } =
+  useTip();
 </script>
 
 <template>
   <div class="space-y-8">
     <MyFormBlock labelId="bill_value" labelText="Bill" :state="bill">
       <MyInputWrapper class="mt-2" iconInput="IconDollar">
-        <MyInput v-model.number="bill" id="bill_value" />
+        <MyInput id="bill_value" :state="bill" @update-state="setBill" />
       </MyInputWrapper>
     </MyFormBlock>
 
@@ -22,15 +23,15 @@ const { bill, tip, people, tipDefaultList, setTip } = useTip();
           variant="primary"
           v-for="tipValue in tipDefaultList"
           :key="tipValue"
-          @click="tip = tipValue"
+          @click="setTip(tipValue)"
           :class="{ '!bg-primary !text-neutral-500': tipValue === tip }"
         >
           {{ tipValue }}%
         </MyButton>
         <MyInput
-          v-model.number="tip"
+          :state="tip"
+          @update-state="setTip"
           id="tip_value"
-          max="100"
           placeholder="Custom"
           class="!text-center"
         />
@@ -43,7 +44,7 @@ const { bill, tip, people, tipDefaultList, setTip } = useTip();
       :state="people"
     >
       <MyInputWrapper class="mt-2" iconInput="IconPerson">
-        <MyInput v-model.number="people" id="people_value" />
+        <MyInput id="people_value" :state="people" @update-state="setPeople" />
       </MyInputWrapper>
     </MyFormBlock>
   </div>

@@ -1,10 +1,10 @@
 <template>
   <input
-    :value="modelValue"
-    @input="$emit('update:modelValue', +$event.target.value)"
+    :value="state"
+    @input="$emit('update-state', +$event.target.value)"
     :id="id"
     :placeholder="placeholder"
-    :class="{ '!border-red-400': modelValue === 0 }"
+    :class="{ '!border-red-400': state === 0 }"
     type="number"
     min="1"
     class="
@@ -28,8 +28,8 @@
 defineProps({
   placeholder: { type: String, default: "0" },
   id: { type: String, required: true },
-  modelValue: { type: Number, required: false },
+  state: { type: [Number, null], required: true },
 });
 
-defineEmits(["update:modelValue"]);
+defineEmits(["update-state"]);
 </script>

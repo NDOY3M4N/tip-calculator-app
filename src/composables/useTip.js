@@ -1,4 +1,4 @@
-import { watch, computed, reactive, toRefs } from "vue";
+import { watch, computed, reactive, toRefs, readonly } from "vue";
 import checkValues from "../lib/checkValues";
 import gsap from "gsap";
 
@@ -14,13 +14,9 @@ const useTip = () => {
     state.bill = state.tip = state.people = null;
   };
 
-  const setTip = (evt) => {
-    const tipValue = +evt.target.value;
-
-    if (tipValue <= 100) {
-      state.tip = tipValue;
-    }
-  };
+  const setBill = (billValue) => (state.bill = billValue);
+  const setTip = (tipValue) => (state.tip = tipValue);
+  const setPeople = (peopleValue) => (state.people = peopleValue);
 
   const tipAmount = computed(() => {
     if (checkValues([state.bill, state.tip, state.people])) return 0;
@@ -52,11 +48,13 @@ const useTip = () => {
   });
 
   return {
-    ...toRefs(state),
+    ...toRefs(readonly(state)),
     reset,
     computedTip,
     computedTotal,
+    setBill,
     setTip,
+    setPeople,
   };
 };
 
