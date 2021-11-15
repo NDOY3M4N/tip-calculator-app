@@ -1,5 +1,5 @@
 import { watch, computed, reactive, toRefs } from "vue";
-import checkValues from "../utils/checkValues";
+import checkValues from "../lib/checkValues";
 import gsap from "gsap";
 
 const state = reactive({

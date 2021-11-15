@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted, watch, ref } from "vue";
 import useTip from "../composables/useTip";
-import formatPrice from "../utils/formatPrice";
-import checkValues from "../utils/checkValues";
+import formatPrice from "../lib/formatPrice";
+import checkValues from "../lib/checkValues";
 import MyButton from "./MyButton.vue";
 
 const { reset, computedTotal, computedTip } = useTip();
