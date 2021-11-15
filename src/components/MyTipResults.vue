@@ -1,11 +1,13 @@
 <script setup>
 import { onMounted, watch, ref } from "vue";
 import useTip from "../composables/useTip";
+import useCounter from "../composables/useCounter";
 import formatPrice from "../lib/formatPrice";
 import checkValues from "../lib/checkValues";
 import MyButton from "./MyButton.vue";
 
-const { reset, computedTotal, computedTip } = useTip();
+const { reset } = useTip();
+const { computedTotal, computedTip } = useCounter();
 const btnReset = ref(null);
 
 // Disable the reset button on first load
