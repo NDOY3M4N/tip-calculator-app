@@ -1,4 +1,4 @@
-import { watch, computed, reactive } from "vue";
+import { watch, computed, reactive, readonly } from "vue";
 import useTip from "./useTip";
 import gsap from "gsap";
 
@@ -23,8 +23,8 @@ const useCounter = () => {
   });
 
   return {
-    computedTip,
-    computedTotal,
+    computedTip: readonly(computedTip),
+    computedTotal: readonly(computedTotal),
   };
 };
 
