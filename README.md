@@ -71,7 +71,9 @@ When used on a component, `v-model` instead does this:
 
 ### Continued development
 
-I would like to animate the Tip Amount & Total Amount result.
+- [x] Animate the Tip Amount & Total Amount result
+- [ ] Switch to typescript
+- [ ] Add PWA
 
 ### Useful resources
 
